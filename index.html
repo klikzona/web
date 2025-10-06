@@ -1,111 +1,113 @@
-<!--
-Simple single-file website - deploy-ready
-Instructions:
-- Customize the content below (title, text, images).
-- To deploy on GitHub Pages: create a new repo, add this file as index.html in the repository root (or in gh-pages branch), then enable Pages in repo Settings. See https://pages.github.com/
-- To deploy on Netlify: drag & drop this file into the Netlify Drop dashboard or connect your Git repo. See https://www.netlify.com/
-- To deploy on Vercel: import the repo or use 'vercel' CLI. See https://vercel.com/
-- To deploy on Cloudflare Pages: connect your Git provider and deploy. See https://pages.cloudflare.com/
-- To deploy on Surge: install surge CLI and run `surge` in the project directory. See https://surge.sh/
--->
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Moja Besplatna Stranica</title>
-  <meta name="description" content="Jednostavna, brza i potpuno besplatna web stranica.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anonimni Umjetnik</title>
   <style>
-    :root{--radius:16px}
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;color:#0f172a;background:linear-gradient(180deg,#f8fafc,#ffffff);-webkit-font-smoothing:antialiased}
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:#fff;box-shadow:0 6px 24px rgba(12,20,30,0.06);position:sticky;top:0}
-    .brand{font-weight:700;color:#0b63ff}
-    nav a{margin-left:14px;text-decoration:none;color:#334155;font-weight:600}
-    .container{max-width:980px;margin:40px auto;padding:0 20px}
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
-    .card{background:#fff;padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06)}
-    h1{margin:0 0 12px;font-size:28px}
-    p.lead{margin:0 0 18px;color:#475569}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-    .feature{padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);border:1px solid #eef2ff;text-align:center}
-    form label{display:block;font-size:13px;margin-bottom:8px;color:#334155}
-    input[type=text],input[type=email],textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e6eef8}
-    button{background:#0b63ff;border:none;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
-    footer{margin:48px 0 20px;text-align:center;color:#64748b}
-    @media(max-width:880px){.hero{grid-template-columns:1fr;}.features{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:560px){.features{grid-template-columns:1fr}}
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #slideshow {
+      position: relative;
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+    #slideshow img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    #slideshow img.active {
+      opacity: 1;
+    }
+    #fullscreen-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid #666;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    #fullscreen-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    footer {
+      position: fixed;
+      bottom: 20px;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">Moje Ime</div>
-    <nav>
-      <a href="#">Početna</a>
-      <a href="#about">O meni</a>
-      <a href="#contact">Kontakt</a>
-    </nav>
-  </header>
 
-  <main class="container">
-    <section class="hero">
-      <div>
-        <div class="card">
-          <h1>Brza i besplatna web stranica</h1>
-          <p class="lead">Ovo je jednostavan predložak statične stranice spreman za objavu na besplatnom hostingu (GitHub Pages, Netlify, Vercel, Cloudflare Pages, Surge).</p>
-          <div class="features">
-            <div class="feature"><strong>Responsivna</strong><div>Izgleda dobro na mobitelu</div></div>
-            <div class="feature"><strong>Brza</strong><div>Statika = munjevito učitavanje</div></div>
-            <div class="feature"><strong>Lako za uređivanje</strong><div>Promijeni tekst, slike i boje</div></div>
-          </div>
-        </div>
+  <div id="slideshow"></div>
 
-        <div id="about" class="card" style="margin-top:18px">
-          <h2>O projektu</h2>
-          <p>Koristi ovaj predložak kao landing stranicu, portfelj ili jednostavnu web prezentaciju. Dodaj svoje slike ili poveži Google Analytics ako želiš statistiku.</p>
-        </div>
-      </div>
-
-      <aside>
-        <div class="card">
-          <h3>Kontakt</h3>
-          <form id="contact" onsubmit="alert('Hvala! Ovo je demo obrazac — poveži backend za stvarne poruke.');return false;">
-            <label for="name">Ime</label>
-            <input id="name" type="text" placeholder="Tvoje ime">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="tvoja@email.com">
-            <label for="message">Poruka</label>
-            <textarea id="message" rows="4" placeholder="Napiši poruku..."></textarea>
-            <div style="margin-top:12px"><button type="submit">Pošalji</button></div>
-          </form>
-        </div>
-
-        <div class="card" style="margin-top:14px;text-align:center">
-          <p style="margin:0;font-weight:700">Spreman za objavu</p>
-          <p style="margin:6px 0 0;color:#64748b;font-size:14px">Preuzmi datoteku i slijedi korake za besplatni hosting.</p>
-        </div>
-      </aside>
-    </section>
-
-    <section style="margin-top:28px" class="card">
-      <h3>Upute za prilagodbu</h3>
-      <ol>
-        <li>Promijeni <code>&lt;title&gt;</code> i tekstove u dokumentu.</li>
-        <li>Dodaj svoju sliku koristeći <code>&lt;img src="..."&gt;</code> ili zamijeni tekst.</li>
-        <li>Ako trebaš obrazac koji radi, koristi Formspree, Netlify Forms ili poveži server.</li>
-      </ol>
-    </section>
-
-  </main>
+  <button id="fullscreen-btn">Full Screen</button>
 
   <footer>
-    © " + new Date().getFullYear() + " — Moje Ime"
+    <p>Donacije (BTC): <code>141amErn6cotSD1vcT51CQkSWgDnRB9sMi</code></p>
   </footer>
 
   <script>
-    // Small enhancement: replace footer year (for environments that don't process JS in template)
-    try{document.querySelector('footer').innerText = '© ' + new Date().getFullYear() + ' — Moje Ime'}catch(e){}
+    // Popis slika iz foldera img/
+    const images = [
+      "img/slika1.jpg",
+      "img/slika2.jpg",
+      "img/slika3.jpg"
+      // dodaj nove slike ovdje
+    ];
+
+    const slideshow = document.getElementById("slideshow");
+    let index = 0;
+
+    // Kreiraj img elemente
+    images.forEach((src, i) => {
+      const img = document.createElement("img");
+      img.src = src;
+      if (i === 0) img.classList.add("active");
+      slideshow.appendChild(img);
+    });
+
+    const slides = document.querySelectorAll("#slideshow img");
+
+    // Automatski slideshow
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 5000); // 5 sekundi po slici
+
+    // Fullscreen
+    const btn = document.getElementById("fullscreen-btn");
+    btn.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    });
   </script>
+
 </body>
 </html>
