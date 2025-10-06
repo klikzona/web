@@ -4,52 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anonimni Umjetnik</title>
+
+  <!-- SEO META -->
+  <meta name="description" content="Anonimni AI umjetnik. Slike iz svih sfera umjetnosti, osim pornografije. Digitalna umjetnost slobode." />
+  <meta name="keywords" content="AI art, anonimni umjetnik, digitalna umjetnost, slike, bitcoin donacije" />
+  <meta name="author" content="Anonimni Umjetnik" />
+  <meta property="og:title" content="Anonimni Umjetnik" />
+  <meta property="og:description" content="AI generirane slike iz svih sfera umjetnosti, osim pornografije." />
+  <meta property="og:image" content="https://klikzona.github.io/web/img/slika1.jpg" />
+  <meta property="og:url" content="https://klikzona.github.io/web/" />
+
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       background-color: #000;
       color: #fff;
-      font-family: 'Courier New', monospace;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       overflow: hidden;
+      font-family: 'Courier New', monospace;
     }
-    #slideshow {
-      position: relative;
+
+    #artwork {
       max-width: 90vw;
-      max-height: 80vh;
-    }
-    #slideshow img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      max-height: 85vh;
       object-fit: contain;
-      opacity: 0;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2);
       transition: opacity 1.5s ease-in-out;
     }
-    #slideshow img.active {
-      opacity: 1;
-    }
+
     #fullscreen-btn {
       position: fixed;
       top: 20px;
       right: 20px;
       background: rgba(255,255,255,0.1);
       color: #fff;
-      border: 1px solid #666;
+      border: 1px solid #555;
+      border-radius: 8px;
       padding: 8px 12px;
       cursor: pointer;
-      border-radius: 8px;
       transition: background 0.3s;
     }
+
     #fullscreen-btn:hover {
       background: rgba(255,255,255,0.3);
     }
+
     footer {
       position: fixed;
       bottom: 20px;
@@ -57,16 +62,42 @@
       font-size: 14px;
       opacity: 0.7;
     }
+
+    .donacija {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .qr {
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      display: none;
+      border: 1px solid #666;
+      border-radius: 8px;
+      background: #111;
+    }
+
+    .donacija:hover .qr {
+      display: block;
+    }
   </style>
 </head>
 <body>
 
-  <div id="slideshow"></div>
+  <img id="artwork" src="" alt="AI umjetnost" />
 
   <button id="fullscreen-btn">Full Screen</button>
 
   <footer>
-    <p>Donacije (BTC): <code>141amErn6cotSD1vcT51CQkSWgDnRB9sMi</code></p>
+    <p>Donacije (BTC): 
+      <span class="donacija">
+        <code>141amErn6cotSD1vcT51CQkSWgDnRB9sMi</code>
+        <img src="img/btc-qr.png" alt="BTC QR" class="qr">
+      </span>
+    </p>
   </footer>
 
   <script>
@@ -74,31 +105,18 @@
     const images = [
       "img/slika1.jpg",
       "img/slika2.jpg",
-      "img/slika3.jpg"
-      // dodaj nove slike ovdje
+      "img/slika3.jpg",
+      "img/slika4.jpg",
+      "img/slika5.jpg"
+      // Dodaj nove slike po želji
     ];
 
-    const slideshow = document.getElementById("slideshow");
-    let index = 0;
+    // Nasumično odaberi jednu
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    const imgElement = document.getElementById('artwork');
+    imgElement.src = randomImage;
 
-    // Kreiraj img elemente
-    images.forEach((src, i) => {
-      const img = document.createElement("img");
-      img.src = src;
-      if (i === 0) img.classList.add("active");
-      slideshow.appendChild(img);
-    });
-
-    const slides = document.querySelectorAll("#slideshow img");
-
-    // Automatski slideshow
-    setInterval(() => {
-      slides[index].classList.remove("active");
-      index = (index + 1) % slides.length;
-      slides[index].classList.add("active");
-    }, 5000); // 5 sekundi po slici
-
-    // Fullscreen
+    // Fullscreen funkcija
     const btn = document.getElementById("fullscreen-btn");
     btn.addEventListener("click", () => {
       if (!document.fullscreenElement) {
