@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anonimni Umjetnik</title>
+  <title>klikzona.github.io/web/</title>
 
-  <!-- SEO META -->
-  <meta name="description" content="Anonimni AI umjetnik. Slike iz svih sfera umjetnosti, osim pornografije. Digitalna umjetnost slobode." />
+  <meta name="description" content="Anonimni AI umjetnik. Galerija digitalne umjetnosti bez ograničenja, osim pornografije." />
   <meta name="keywords" content="AI art, anonimni umjetnik, digitalna umjetnost, slike, bitcoin donacije" />
   <meta name="author" content="Anonimni Umjetnik" />
   <meta property="og:title" content="Anonimni Umjetnik" />
@@ -20,35 +19,51 @@
       padding: 0;
       height: 100%;
       background-color: #000;
-      color: #fff;
+      color: #ccc;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       font-family: 'Courier New', monospace;
+      user-select: none;
+    }
+
+    header {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    header span {
+      color: #e63946;
     }
 
     #artwork {
-      max-width: 90vw;
-      max-height: 85vh;
+      max-width: 95vw;
+      max-height: 95vh;
       object-fit: contain;
       border-radius: 10px;
-      box-shadow: 0 0 30px rgba(255,255,255,0.2);
-      transition: opacity 1.5s ease-in-out;
+      box-shadow: 0 0 40px rgba(255,255,255,0.15);
+      transition: opacity 0.8s ease-in-out;
+      cursor: pointer;
     }
 
     #fullscreen-btn {
       position: fixed;
-      top: 20px;
+      top: 15px;
       right: 20px;
       background: rgba(255,255,255,0.1);
-      color: #fff;
+      color: #eee;
       border: 1px solid #555;
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 8px 12px;
       cursor: pointer;
-      transition: background 0.3s;
+      font-size: 13px;
+      transition: all 0.3s;
     }
 
     #fullscreen-btn:hover {
@@ -57,10 +72,11 @@
 
     footer {
       position: fixed;
-      bottom: 20px;
+      bottom: 10px;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.7;
+      color: #999;
     }
 
     .donacija {
@@ -70,7 +86,7 @@
 
     .qr {
       position: absolute;
-      bottom: 120%;
+      bottom: 130%;
       left: 50%;
       transform: translateX(-50%);
       width: 160px;
@@ -78,92 +94,30 @@
       border: 1px solid #666;
       border-radius: 8px;
       background: #111;
+      padding: 6px;
     }
 
     .donacija:hover .qr {
       display: block;
     }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .fade-in {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
+
+  <header>
+    <span>klik</span>zona.github.io/web/
+  </header>
 
   <img id="artwork" src="" alt="AI umjetnost" />
 
   <button id="fullscreen-btn">Full Screen</button>
 
-  <footer>
-    <p>Donacije (BTC): 
-      <span class="donacija">
-        <code>141amErn6cotSD1vcT51CQkSWgDnRB9sMi</code>
-        <img src="btc-qr.png" alt="BTC QR" class="qr">
-      </span>
-    </p>
-  </footer>
-
-  <script>
-    // Popis slika iz foldera img/
-    const images = [
-
-      "img/slika1.jpg",
-      "img/slika2.jpg",
-      "img/slika3.jpg",
-      "img/slika4.jpg",
-      "img/slika5.jpg",
-      "img/slika6.jpg",
-      
-      "img/slika7.jpg",
-      "img/slika8.jpg",
-      "img/slika9.jpg",
-      "img/slika10.jpg",
-      "img/slika11.png",
-      "img/slika12.png",
-      "img/slika13.png",
-      "img/slika14.png",
-      "img/slika15.png",
-      "img/slika16.png",
-      "img/slika17.png",
-      "img/slika18.png",
-      "img/slika19.png",
-
-      "img/slika20.jpg",
-      "img/slika21.jpg",
-      "img/slika22.jpg",
-      "img/slika23.jpg",
-      "img/slika24.jpg",
-      "img/slika25.jpg",
-      "img/slika26.jpg",
-      "img/slika27.jpg",
-      "img/slika28.jpg",
-      "img/slika29.jpg",
-      "img/slika30.jpg",
-      "img/slika31.jpg",
-      "img/slika32.jpg",
-      "img/slika33.jpg",
-      "img/slika34.jpg",
-      "img/slika35.jpg",
-      "img/slika36.jpg"
-
-    
-      
-
-      // Dodaj nove slike po želji
-    ];
-
-    // Nasumično odaberi jednu
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    const imgElement = document.getElementById('artwork');
-    imgElement.src = randomImage;
-
-    // Fullscreen funkcija
-    const btn = document.getElementById("fullscreen-btn");
-    btn.addEventListener("click", () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
-    });
-  </script>
-
-</body>
-</html>
+  <footer
