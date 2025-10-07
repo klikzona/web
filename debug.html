@@ -1,0 +1,77 @@
+  <footer>
+    <p>
+      Donacije (BTC): 
+      <span class="donacija">
+        <code>141amErn6cotSD1vcT51CQkSWgDnRB9sMi</code>
+        <img src="btc-qr.png" alt="BTC QR" class="qr">
+      </span>
+      <span id="debug" style="margin-left: 12px; color: #888; font-style: italic;"></span>
+    </p>
+  </footer>
+
+  <script>
+    const images = [
+      "img/slika1.jpg", "img/slika2.jpg", "img/slika3.jpg", "img/slika4.jpg", "img/slika5.jpg",
+      "img/slika6.jpg", "img/slika7.jpg", "img/slika8.jpg", "img/slika9.jpg", "img/slika10.jpg",
+      "img/slika11.png", "img/slika12.png", "img/slika13.png", "img/slika14.png", "img/slika15.png",
+      "img/slika16.png", "img/slika17.png", "img/slika18.png", "img/slika19.png", "img/slika20.jpg",
+      "img/slika21.jpg", "img/slika22.jpg", "img/slika23.jpg", "img/slika24.jpg", "img/slika25.jpg",
+      "img/slika26.jpg", "img/slika27.jpg", "img/slika28.jpg", "img/slika29.jpg", "img/slika30.jpg",
+      "img/slika31.jpg", "img/slika32.jpg", "img/slika33.jpg", "img/slika34.jpg", "img/slika35.jpg",
+      "img/slika36.jpg", "img/slika37.jpg", "img/slika38.jpg", "img/slika39.jpg", "img/slika40.jpg",
+      "img/slika41.jpg", "img/slika42.jpg", "img/slika43.jpg", "img/slika44.jpg", "img/slika45.jpg",
+      "img/slika46.jpg", "img/slika47.jpg", "img/slika48.jpg", "img/slika49.jpg", "img/slika50.jpg",
+      "img/slika51.jpg", "img/slika52.jpg", "img/slika53.jpg", "img/slika54.jpg", "img/slika55.jpg"
+    ];
+
+    const imgElement = document.getElementById("artwork");
+    const debugElement = document.getElementById("debug");
+    let currentImage = "";
+
+    function randomImage() {
+      let newImage;
+      do {
+        newImage = images[Math.floor(Math.random() * images.length)];
+      } while (newImage === currentImage && images.length > 1);
+      currentImage = newImage;
+
+      // Animacija prijelaza
+      imgElement.classList.add("fade-out");
+      setTimeout(() => {
+        imgElement.src = newImage;
+        imgElement.classList.remove("fade-out");
+        imgElement.classList.add("fade-in");
+
+        // 🧩 Debug info — prikazuje samo ime datoteke
+        const filename = newImage.split("/").pop();
+        debugElement.textContent = `[${filename}]`;
+      }, 300);
+    }
+
+    // Učitaj početnu
+    randomImage();
+
+    // Lijevi klik = nova slika
+    imgElement.addEventListener("click", e => {
+      if (e.button === 0) randomImage();
+    });
+
+    // Desni klik = download slike
+    imgElement.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      const link = document.createElement("a");
+      link.href = imgElement.src;
+      link.download = imgElement.src.split("/").pop();
+      link.click();
+    });
+
+    // Fullscreen funkcija
+    const btn = document.getElementById("fullscreen-btn");
+    btn.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    });
+  </script>
