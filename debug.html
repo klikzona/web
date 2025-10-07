@@ -198,6 +198,17 @@
       link.click();
     });
 
+        // Animacija prijelaza
+      imgElement.classList.add("fade-out");
+      setTimeout(() => {
+        imgElement.src = newImage;
+        imgElement.classList.remove("fade-out");
+        imgElement.classList.add("fade-in");
+
+        // 🧩 Debug info — prikazuje samo ime datoteke
+        const filename = newImage.split("/").pop();
+        debugElement.textContent = `[${filename}]`;
+
     // Fullscreen funkcija
     const btn = document.getElementById("fullscreen-btn");
     btn.addEventListener("click", () => {
