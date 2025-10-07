@@ -1,4 +1,126 @@
-  <footer>
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>klikzona.github.io/web/</title>
+
+  <meta name="description" content="Anonimni AI umjetnik. Galerija digitalne umjetnosti bez ograničenja, osim pornografije." />
+  <meta name="keywords" content="AI art, anonimni umjetnik, digitalna umjetnost, slike, bitcoin donacije" />
+  <meta name="author" content="Anonimni Umjetnik" />
+  <meta property="og:title" content="Anonimni Umjetnik" />
+  <meta property="og:description" content="AI generirane slike iz svih sfera umjetnosti, osim pornografije." />
+  <meta property="og:image" content="https://klikzona.github.io/web/img/slika1.jpg" />
+  <meta property="og:url" content="https://klikzona.github.io/web/" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      color: #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Courier New', monospace;
+      user-select: none;
+    }
+
+    header {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    header span {
+      color: #e63946;
+    }
+
+    #artwork {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 40px rgba(255,255,255,0.15);
+      transition: opacity 0.8s ease-in-out;
+      cursor: pointer;
+    }
+
+    #fullscreen-btn {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #eee;
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+
+    #fullscreen-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.7;
+      color: #999;
+    }
+
+    .donacija {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .qr {
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      display: none;
+      border: 1px solid #666;
+      border-radius: 8px;
+      background: #111;
+      padding: 6px;
+    }
+
+    .donacija:hover .qr {
+      display: block;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .fade-in {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span>klik</span>zona.github.io/web/
+  </header>
+
+  <img id="artwork" src="" alt="AI umjetnost" />
+
+  <button id="fullscreen-btn">Full Screen</button>
+
+   <footer>
     <p>
       Donacije (BTC): 
       <span class="donacija">
@@ -36,36 +158,33 @@
       "img/slika109.jpg", "img/slika110.jpg", "img/slika111.jpg", "img/slika112.jpg", "img/slika113.jpg",
       "img/slika114.jpg", "img/slika115.jpg", "img/slika116.jpg", "img/slika117.jpg", "img/slika118.jpg",
       "img/slika119.jpg", "img/slika120.jpg", "img/slika121.jpg", "img/slika122.jpg", "img/slika123.jpg",
+      "img/slika124.jpg", "img/slika125.jpg", "img/slika126.jpg", "img/slika127.jpg", "img/slika128.jpg"
     ];
+
+
 
     const imgElement = document.getElementById("artwork");
     const debugElement = document.getElementById("debug");
     let currentImage = "";
 
-    function randomImage() {
+      function randomImage() {
       let newImage;
       do {
         newImage = images[Math.floor(Math.random() * images.length)];
       } while (newImage === currentImage && images.length > 1);
       currentImage = newImage;
-
-      // Animacija prijelaza
       imgElement.classList.add("fade-out");
       setTimeout(() => {
         imgElement.src = newImage;
         imgElement.classList.remove("fade-out");
         imgElement.classList.add("fade-in");
-
-        // 🧩 Debug info — prikazuje samo ime datoteke
-        const filename = newImage.split("/").pop();
-        debugElement.textContent = `[${filename}]`;
       }, 300);
     }
 
     // Učitaj početnu
     randomImage();
 
-    // Lijevi klik = nova slika
+    // Klik lijevo = nova slika
     imgElement.addEventListener("click", e => {
       if (e.button === 0) randomImage();
     });
@@ -89,3 +208,6 @@
       }
     });
   </script>
+
+</body>
+</html>
